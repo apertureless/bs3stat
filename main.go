@@ -46,10 +46,7 @@ func migrate(db *sql.DB) {
 	sql := `
 	CREATE TABLE IF NOT EXISTS backups(
 		id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-		project VARCHAR NOT NULL,
-		started DATETIME NOT NULL,
-		finished DATETIME NOT NULL,
-		status VARCHAR NOT NULL
+		name VARCHAR NOT NULL
 	);
 	`
 

@@ -1,2 +1,4 @@
 storage.db
 *.swp
+web/node_modules
+web/dist

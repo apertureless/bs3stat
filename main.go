@@ -18,7 +18,7 @@ func main() {
 	e := echo.New()
 
 	// Serve index file
-	e.File("/", "public/index.html")
+	e.File("/", "web/dist/index.html")
 	// Routes
 	e.GET("/backups", handlers.GetBackups(db))
 	e.PUT("/backups", handlers.PutBackup(db))

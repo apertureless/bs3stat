@@ -25,7 +25,7 @@ func PutBackup(db *sql.DB) echo.HandlerFunc {
 		// Map incoming json body to backup
 		c.Bind(&backup)
 
-		id, err := models.PutBackup(db, backup.Name)
+		id, err := models.PutBackup(db, backup.Name, backup.Started, backup.Finished, backup.Duration, backup.Status)
 		// Return JSON response if successfull
 
 		if err == nil {

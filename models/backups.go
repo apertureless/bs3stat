@@ -11,6 +11,7 @@ type Backup struct {
 	Name     string `json:"name"`
 	Started  string `json:"started"`
 	Finished string `json:"finished"`
+	Duration string `json:"duration"`
 	Status   string `json:"status"`
 }
 
@@ -43,8 +44,8 @@ func GetBackups(db *sql.DB) BackupCollection {
 	return result
 }
 
-func PutBackup(db *sql.DB, name string) (int64, error) {
-	sql := "INSERT INTO backups(name) VALUES(?)"
+func PutBackup(db *sql.DB, name string, starting string, finished string, duration string, status string) (int64, error) {
+	sql := "INSERT INTO backups(name, starting, finished, duration, status) VALUES(?,?,?,?,?)"
 
 	// Create prepared sql statement
 	stmt, err := db.Prepare(sql)

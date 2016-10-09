@@ -33,7 +33,7 @@ func GetBackups(db *sql.DB) BackupCollection {
 
 	for rows.Next() {
 		backup := Backup{}
-		err2 := rows.Scan(&backup.ID, &backup.Name)
+		err2 := rows.Scan(&backup.ID, &backup.Name, &backup.Started, &backup.Finished, &backup.Duration, &backup.Status)
 
 		if err2 != nil {
 			panic(err2)
@@ -45,7 +45,7 @@ func GetBackups(db *sql.DB) BackupCollection {
 }
 
 func PutBackup(db *sql.DB, name string, starting string, finished string, duration string, status string) (int64, error) {
-	sql := "INSERT INTO backups(name, starting, finished, duration, status) VALUES(?,?,?,?,?)"
+	sql := "INSERT INTO backups(name, starting, finished, duration, status) VALUES(?, ?, ?, ?, ?)"
 
 	// Create prepared sql statement
 	stmt, err := db.Prepare(sql)
@@ -55,7 +55,7 @@ func PutBackup(db *sql.DB, name string, starting string, finished string, durati
 
 	defer stmt.Close()
 
-	result, err2 := stmt.Exec(name)
+	result, err2 := stmt.Exec(name, starting, finished, duration, status)
 
 	if err2 != nil {
 		panic(err)

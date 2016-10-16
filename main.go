@@ -18,6 +18,7 @@ func main() {
 	e := echo.New()
 
 	// Serve index file
+	e.Static("/", "web/dist")
 	e.File("/", "web/dist/index.html")
 	// Routes
 	e.GET("/backups", handlers.GetBackups(db))

@@ -1,18 +1,67 @@
 <template>
-  <div class="page">
-    <counter></counter>
-    <p>
-      To get started, edit files in <code>./client</code> and save.
-    </p>
-  </div>
+	<div class="page">
+		<h1>bs3stat</h1>
+		<div class="Cardlist">
+			<card v-for="project in projects" :data="project">
+			</card>
+		</div>
+	</div>
 </template>
 
 <script>
-import Counter from '../components/Counter'
+import _ from 'lodash'
+import Card from '../components/card/Card'
 
 export default {
-  components: {
-    Counter
-  }
+	components: {
+		Card
+	},
+
+	data () {
+		return {
+			backups: [],
+			projects: []
+		}
+	},
+	created () {
+		this.$http.get('http://localhost:8080/backups').then((response) => {
+			this.backups = response.data.items ? response.data.items : []
+			this.getProjects()
+		})
+	},
+
+	methods: {
+		getProjects () {
+			this.projects = _.groupBy(this.backups, 'name')
+		}
+	}
 }
 </script>
+
+<style>
+	body {
+		background: #F5F6F9;
+	}
+
+  h1 {
+    font-family: 'Helvetica Neue';
+    font-size: 28px;
+    font-weight: 100;
+    margin: 20px 0;
+    color: #81879b;
+  }
+
+	.Cardlist {
+		display: flex;
+		flex-flow: row wrap;
+		margin:  0 -10px;
+	}
+
+  .page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+  }
+</style>

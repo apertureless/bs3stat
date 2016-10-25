@@ -40,7 +40,7 @@
         type: Number
       },
       barPadding: {
-        default: 13,
+        default: 20,
         type: Number
       },
       color: {
@@ -91,7 +91,8 @@
       for (var i = 10; i; i--) {
         this.dataset.push({
           bin: new Date(Date.now() - (i * 3600000)),
-          value: Math.max(250, Math.random() * 3000 | 0)
+          value: Math.max(250, Math.random() * 3000 | 0),
+          status: Math.floor(Math.random() * 3)
         })
       }
       this.init()
@@ -168,6 +169,7 @@
         this.chart.select('.x.axis').call(this.xAxis)
         this.chart.select('.y.axis').call(this.yAxis)
       },
+
       renderBars () {
         const [w, h] = this.dimensions()
         const width = w / this.dataset.length
@@ -187,7 +189,7 @@
               .attr('width', barWidth)
               .attr('height', h)
 
-         column.exit().remove()
+        column.exit().remove()
 
         const bar = this.chart.selectAll('.bar')
           .data(this.dataset)
@@ -195,7 +197,7 @@
         // enter
         bar.enter()
           .append('rect')
-          .attr('class', 'bar')
+          .attr('class', d => this.typeClass(d.status))
           .attr('x', d => this.x(d.bin))
           .attr('y', d => this.y(d.value))
           .attr('rx', this.type == 'rounded' ? barWidth / 2 : 0)
@@ -206,6 +208,17 @@
         if (this.color) bar.style('fill', d => color(d.value))
         // exit
         bar.exit().remove()
+      },
+
+      typeClass (status) {
+        let className
+
+        if (status === 0) className = 'bar'
+        if (status === 1) className = 'bar--warning'
+        if (status === 2) className = 'bar--failure'
+        console.log('status', status)
+        console.log('className', className)
+        return className
       }
     }
   }
@@ -221,6 +234,14 @@
 }
 
 .chart .bar {
+  fill: rgb(42, 243, 141);
+}
+
+.chart .bar--warning {
+  fill: rgb(243, 177, 42);
+}
+
+.chart .bar--failure {
   fill: rgb(243, 42, 100);
 }
 
@@ -231,7 +252,7 @@
 .chart .axis path,
 .chart .axis line {
   fill: none;
-  stroke: rgb(230, 237, 244);
+  stroke: rgb(23x0, 237, 244);
   stroke-width: 1.5px;
   shape-rendering: crispEdges;
 }

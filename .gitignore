@@ -1,4 +1,5 @@
 storage.db
+test_storage.db
 *.swp
 web/node_modules
 web/dist

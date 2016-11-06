@@ -1,63 +1,44 @@
 package main
 
 import (
-	"bs3stat/handlers"
-	"database/sql"
+	"backup/db"
+	"backup/handlers"
+	"backup/model"
+	"flag"
+	"fmt"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
+	port := flag.String("port", "3000", "Your port number (default to 3000).")
+	migrate := flag.Bool("migrate", false, "Run database migrations.")
+	seed := flag.Bool("seed", false, "Seed database with some demo data.")
+	flag.Parse()
 
-	// Setup Database
-	db := initDB("storage.db")
-	migrate(db)
-	// Echo Framework instance
+	db.InitDB("storage.db", *migrate, *seed)
+
 	e := echo.New()
+	e = routes(e)
 
-	// Serve index file
-	e.Static("/", "web/dist")
-	e.File("/", "web/dist/index.html")
-	// Routes
-	e.GET("/backups", handlers.GetBackups(db))
-	e.PUT("/backups", handlers.PutBackup(db))
+	project := model.Project{
+		Title: "Lalalalla dongo",
+		Name:  "acme_dongo",
+	}
+	db.DB.Create(&project)
 
-	// Start Webserver
-	e.Run(standard.New(":8080"))
+	// Start server
+	e.Run(standard.New(":" + *port))
+	fmt.Println("\n\x1b[32;1mRunning on: http://localhost:" + *port + ".\x1b[0m")
 }
 
-func initDB(filepath string) *sql.DB {
-	db, err := sql.Open("sqlite3", filepath)
+func routes(e *echo.Echo) *echo.Echo {
+	e.GET("/projects", handlers.ProjectIndex)
+	e.POST("/projects", handlers.CreateProject)
+	e.GET("/projects/:id", handlers.GetProject)
+	e.PUT("/projects/:id", handlers.UpdateProject)
+	e.DELETE("/projects/:id", handlers.DeleteProject)
 
-	// Check for DB errors
-	if err != nil {
-		panic(err)
-	}
-
-	// Check if no db erros, but still no connection
-	if db == nil {
-		panic("db nil")
-	}
-	return db
-}
-
-func migrate(db *sql.DB) {
-	sql := `
-	CREATE TABLE IF NOT EXISTS backups(
-		id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-		name VARCHAR NOT NULL,
-		starting VARCHAR,
-		finished VARCHAR,
-		duration VARCHAR,
-		status VARCHAR
-	);
-	`
-
-	_, err := db.Exec(sql)
-
-	if err != nil {
-		panic(err)
-	}
+	return e
 }

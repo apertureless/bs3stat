@@ -1,9 +1,9 @@
 package main
 
 import (
-	"backup/db"
-	"backup/handlers"
-	"backup/model"
+	"bs3stat/db"
+	"bs3stat/handlers"
+	"bs3stat/model"
 	"flag"
 	"fmt"
 

@@ -1,7 +1,7 @@
 package db
 
 import (
-	"backup/migration"
+	"bs3stat/migration"
 	"fmt"
 
 	"github.com/jinzhu/gorm"

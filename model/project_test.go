@@ -1,8 +1,8 @@
 package model_test
 
 import (
-	"backup/db"
-	"backup/model"
+	"bs3stat/db"
+	"bs3stat/model"
 	"testing"
 )
 

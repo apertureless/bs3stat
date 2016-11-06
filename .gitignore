@@ -4,3 +4,4 @@ test_storage.db
 web/node_modules
 web/dist
 Godeps/_workspace
+vendor/

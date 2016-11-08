@@ -5,3 +5,4 @@ web/node_modules
 web/dist
 Godeps/_workspace
 vendor/
+tags

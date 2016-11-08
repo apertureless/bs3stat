@@ -29,8 +29,8 @@ func main() {
 	db.DB.Create(&project)
 
 	// Start server
-	e.Run(standard.New(":" + *port))
 	fmt.Println("\n\x1b[32;1mRunning on: http://localhost:" + *port + ".\x1b[0m")
+	e.Run(standard.New(":" + *port))
 }
 
 func routes(e *echo.Echo) *echo.Echo {

@@ -6,19 +6,22 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+// Project represends a backup project
 type Project struct {
 	gorm.Model
 	Title string `gorm:"size:255"`
 	Name  string `gorm:"size:255"`
 }
 
+// AddProject is the action to add a new project to the database
 func AddProject() {
 	fmt.Println("yo")
 }
 
-func (this *Model) AllProjects() []Project {
+// AllProjects return a collection of Project
+func (m *Model) AllProjects() []Project {
 	var projects []Project
-	this.DB.First(&projects)
+	m.DB.First(&projects)
 	// this.First(&projects)
 	fmt.Println(projects)
 

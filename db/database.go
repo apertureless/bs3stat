@@ -5,29 +5,27 @@ import (
 	"fmt"
 
 	"github.com/jinzhu/gorm"
+	// Needs to be blank import because of sqlite init function
 	_ "github.com/mattn/go-sqlite3"
 )
 
-var (
-	// DBCon is the connection handle for the database
-	DB *gorm.DB
-)
-
+// InitDB creates an database and opens a connection
 func InitDB(filepath string, runMigrations bool, seedDatabase bool) *gorm.DB {
 	var err error
-	if DB, err = gorm.Open("sqlite3", filepath); err != nil {
+	db, err := gorm.Open("sqlite3", filepath)
+	if err != nil {
 		panic(fmt.Sprintf("failed to connect database. err=%+v", err))
 	}
 
-	defer DB.Close()
-
 	if runMigrations == true {
-		migration.Migrate(DB)
+		migration.Migrate(db)
 	}
 
 	if seedDatabase == true {
-		migration.Seed(DB)
+		migration.Seed(db)
 	}
 
-	return DB
+	db.LogMode(true)
+
+	return db
 }

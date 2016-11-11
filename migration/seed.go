@@ -7,6 +7,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+// Seed creates dummy data
 func Seed(db *gorm.DB) {
 	project := model.Project{
 		Title: "Hello World",

@@ -8,12 +8,12 @@ import (
 )
 
 const (
-	driverUrl     string = "sqlite3://storage.db"
+	driverURL     string = "sqlite3://storage.db"
 	storageFile   string = "./storage.db"
 	migrationPath string = "./db/migrations/"
 )
 
-// Auto migrate schema, declared in our models
+// Migrate Auto migrate schema, declared in our models
 func Migrate(db *gorm.DB) {
 	db.AutoMigrate(&model.Project{})
 

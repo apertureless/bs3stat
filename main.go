@@ -17,7 +17,8 @@ func main() {
 	seed := flag.Bool("seed", false, "Seed database with some demo data.")
 	flag.Parse()
 
-	db.InitDB("storage.db", *migrate, *seed)
+	db := db.InitDB("storage.db", *migrate, *seed)
+	model.SetDatabase(db)
 
 	e := echo.New()
 	e = routes(e)
@@ -26,7 +27,7 @@ func main() {
 		Title: "Lalalalla dongo",
 		Name:  "acme_dongo",
 	}
-	db.DB.Create(&project)
+	db.Create(&project)
 
 	// Start server
 	fmt.Println("\n\x1b[32;1mRunning on: http://localhost:" + *port + ".\x1b[0m")

@@ -19,9 +19,9 @@ func AddProject() {
 }
 
 // AllProjects return a collection of Project
-func (m *Model) AllProjects() []Project {
+func AllProjects() []Project {
 	var projects []Project
-	m.DB.First(&projects)
+	DB.First(&projects)
 	// this.First(&projects)
 	fmt.Println(projects)
 

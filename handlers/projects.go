@@ -9,16 +9,8 @@ import (
 
 // ProjectIndex returns all Projects in the database
 func ProjectIndex(c echo.Context) error {
-	// u := new(User)
-	// if err := c.Bind(u); err != nil {
-	// 	return err
-	// }
-	//
 	p := model.AllProjects()
-
 	return c.JSON(http.StatusOK, p)
-
-	// return c.NoContent(http.StatusNoContent)
 }
 
 // CreateProject handles the creation of new projects

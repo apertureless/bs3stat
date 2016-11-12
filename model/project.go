@@ -25,3 +25,10 @@ func AllProjects() []Project {
 
 	return projects
 }
+
+// GetProject by ID
+func GetProject(id string) Project {
+	var project Project
+	DB.First(&project, id)
+	return project
+}

@@ -20,7 +20,9 @@ func CreateProject(c echo.Context) error {
 
 // GetProject gets a project by ID
 func GetProject(c echo.Context) error {
-	return c.NoContent(http.StatusNoContent)
+	id := c.Param("id")
+	p := model.GetProject(id)
+	return c.JSON(http.StatusOK, p)
 }
 
 // UpdateProject updates an project

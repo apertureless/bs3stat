@@ -31,6 +31,7 @@ func main() {
 
 	// Start server
 	fmt.Println("\n\x1b[32;1mRunning on: http://localhost:" + *port + ".\x1b[0m")
+	defer db.Close()
 	e.Run(standard.New(":" + *port))
 }
 

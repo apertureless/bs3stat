@@ -21,9 +21,7 @@ func AddProject() {
 // AllProjects return a collection of Project
 func AllProjects() []Project {
 	var projects []Project
-	DB.First(&projects)
-	// this.First(&projects)
-	fmt.Println(projects)
+	DB.Find(&projects)
 
 	return projects
 }

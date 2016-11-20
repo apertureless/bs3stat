@@ -25,7 +25,6 @@ export default {
 	},
 	created () {
 		this.$http.get('http://localhost:3000/projects').then((response) => {
-			console.log(response.data)
 			this.backups = response.data ? response.data : []
 			this.getProjects()
 		})

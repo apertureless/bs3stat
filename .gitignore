@@ -6,3 +6,4 @@ web/dist
 Godeps/_workspace
 vendor/
 tags
+launch.json

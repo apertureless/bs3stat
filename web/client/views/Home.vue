@@ -24,15 +24,16 @@ export default {
 		}
 	},
 	created () {
-		this.$http.get('http://localhost:8080/backups').then((response) => {
-			this.backups = response.data.items ? response.data.items : []
+		this.$http.get('http://localhost:3000/projects').then((response) => {
+			console.log(response.data)
+			this.backups = response.data ? response.data : []
 			this.getProjects()
 		})
 	},
 
 	methods: {
 		getProjects () {
-			this.projects = _.groupBy(this.backups, 'name')
+			this.projects = _.groupBy(this.backups, 'Name')
 		}
 	}
 }

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import _ from 'lodash'
+  import {first} from 'lodash'
   import BarChart from '../stat/Bar'
 
   export default {
@@ -21,7 +21,7 @@
 
     computed: {
       projectName () {
-        return _.first(this.data).name
+        return first(this.data).Name
       }
     }
   }

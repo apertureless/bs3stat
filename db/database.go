@@ -26,6 +26,5 @@ func InitDB(filepath string, runMigrations bool, seedDatabase bool) *gorm.DB {
 	}
 
 	db.LogMode(true)
-
 	return db
 }

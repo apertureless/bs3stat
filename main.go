@@ -23,11 +23,9 @@ func main() {
 	e := echo.New()
 	e = routes(e)
 
-	project := model.Project{
-		Title: "Lalalalla dongo",
-		Name:  "acme_dongo",
-	}
-	db.Create(&project)
+	// Serve static files
+	e.Static("/", "web/dist")
+	e.File("/", "web/dist/index.html")
 
 	// Start server
 	fmt.Println("\n\x1b[32;1mRunning on: http://localhost:" + *port + ".\x1b[0m")

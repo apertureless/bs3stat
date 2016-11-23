@@ -17,11 +17,13 @@ func AddProject(project Project) (err error) {
 	// Start transaction
 	tx := DB.Begin()
 
+	// Rollback if error occurs
 	if err := tx.Create(&project).Error; err != nil {
 		tx.Rollback()
 		return err
 	}
 
+	// Commit transaction
 	tx.Commit()
 
 	return nil

@@ -7,6 +7,9 @@ import (
 	"github.com/labstack/echo"
 )
 
+// H maps strings
+type H map[string]interface{}
+
 // ProjectIndex returns all Projects in the database
 func ProjectIndex(c echo.Context) error {
 	p := model.AllProjects()
@@ -15,7 +18,20 @@ func ProjectIndex(c echo.Context) error {
 
 // CreateProject handles the creation of new projects
 func CreateProject(c echo.Context) error {
-	return c.NoContent(http.StatusNoContent)
+	var project model.Project
+	c.Bind(&project)
+
+	err := model.AddProject(project)
+
+	if err == nil {
+		return c.JSON(http.StatusCreated, H{
+			"created": "😊",
+		})
+
+	}
+
+	return c.JSON(http.StatusOK, err)
+
 }
 
 // GetProject gets a project by ID

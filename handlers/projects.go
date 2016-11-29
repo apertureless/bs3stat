@@ -50,5 +50,7 @@ func UpdateProject(c echo.Context) error {
 func DeleteProject(c echo.Context) error {
 	id := c.Param("id")
 	model.DeleteProject(id)
-	return c.NoContent(http.StatusNoContent)
+	return c.JSON(http.StatusCreated, H{
+		"deleted": id,
+	})
 }

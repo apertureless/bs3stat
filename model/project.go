@@ -44,3 +44,10 @@ func GetProject(id string) Project {
 	DB.First(&project, id)
 	return project
 }
+
+// DeleteProject deletes an project based on the project id
+func DeleteProject(id string) {
+	var project Project
+	DB.First(&project, id)
+	DB.Delete(&project)
+}

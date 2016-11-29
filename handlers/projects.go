@@ -48,5 +48,7 @@ func UpdateProject(c echo.Context) error {
 
 // DeleteProject deletes an project by ID
 func DeleteProject(c echo.Context) error {
+	id := c.Param("id")
+	model.DeleteProject(id)
 	return c.NoContent(http.StatusNoContent)
 }

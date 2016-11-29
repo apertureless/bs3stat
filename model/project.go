@@ -1,8 +1,6 @@
 package model
 
 import (
-	"fmt"
-
 	"github.com/jinzhu/gorm"
 )
 
@@ -14,8 +12,22 @@ type Project struct {
 }
 
 // AddProject is the action to add a new project to the database
-func AddProject() {
-	fmt.Println("yo")
+func AddProject(project Project) (err error) {
+
+	// Start transaction
+	tx := DB.Begin()
+
+	// Rollback if error occurs
+	if err := tx.Create(&project).Error; err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	// Commit transaction
+	tx.Commit()
+
+	return nil
+
 }
 
 // AllProjects return a collection of Project
@@ -31,4 +43,11 @@ func GetProject(id string) Project {
 	var project Project
 	DB.First(&project, id)
 	return project
+}
+
+// DeleteProject deletes an project based on the project id
+func DeleteProject(id string) {
+	var project Project
+	DB.First(&project, id)
+	DB.Delete(&project)
 }

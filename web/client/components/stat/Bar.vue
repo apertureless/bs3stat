@@ -5,6 +5,7 @@
 
 <script>
   import * as d3 from "d3";
+  import * as moment from "moment"
 
   const zeroMargin = { top: 0, right: 0, bottom: 0, left: 0 }
 
@@ -83,24 +84,26 @@
       }
     },
     mounted () {
-      // this.dataset = _.map(this.data, 'duration')
       if (!this.axis) this.margin = zeroMargin
 
-      // @TODO: Remove Tmp Data
-      //
-      for (var i = 10; i; i--) {
-        this.dataset.push({
-          bin: new Date(Date.now() - (i * 3600000)),
-          value: Math.max(250, Math.random() * 3000 | 0),
-          status: Math.floor(Math.random() * 3)
-        })
-      }
+      this.normalizeData()
       this.init()
       this.renderAxis()
       this.renderBars()
     },
 
     methods: {
+      normalizeData () {
+
+        this.data.forEach((project) => {
+          this.dataset.push({
+            bin: moment(project.CreatedAt).toDate(),
+            value: moment.duration(project.Duration, 'hh:mm:ss').asSeconds(),
+            status: project.Status
+          })
+        })
+      },
+
       dimensions () {
         const w = this.width - this.margin.left - this.margin.right
         const h = this.height - this.margin.top - this.margin.bottom
@@ -122,8 +125,9 @@
             .range(this.color)
         }
 
-        this.x = d3.scaleTime()
+        this.x = d3.scaleLinear()
           .range([0, w])
+
         this.y = d3.scaleLinear()
           .range([h, 0])
 
@@ -189,6 +193,7 @@
               .attr('width', barWidth)
               .attr('height', h)
 
+
         column.exit().remove()
 
         const bar = this.chart.selectAll('.bar')
@@ -205,6 +210,10 @@
           .attr('width', barWidth)
           .attr('height', d => h - this.y(d.value))
 
+          this.dataset.forEach((d) => {
+            console.log(this.y(d.value))
+          })
+
         if (this.color) bar.style('fill', d => color(d.value))
         // exit
         bar.exit().remove()
@@ -213,11 +222,9 @@
       typeClass (status) {
         let className
 
-        if (status === 0) className = 'bar'
-        if (status === 1) className = 'bar--warning'
-        if (status === 2) className = 'bar--failure'
-        console.log('status', status)
-        console.log('className', className)
+        if (status === 'Backup::Success') className = 'bar'
+        if (status === 'Backup::Warning') className = 'bar--warning'
+        if (status === 'Backup::Failure') className = 'bar--failure'
         return className
       }
     }

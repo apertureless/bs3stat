@@ -24,7 +24,7 @@ func CreateProject(c echo.Context) error {
 	err := model.AddProject(project)
 
 	if err == nil {
-		return c.JSON(http.StatusCreated, H{
+		return c.JSON(http.StatusOK, H{
 			"created": "😊",
 		})
 

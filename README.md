@@ -6,6 +6,13 @@
 
 Is a small dashboard service in go and vue, to collect and visualize your backups made with [backup](https://github.com/backup/backup)
 
+**🚧 It is still in early alpha and not production ready⚠**
+
+<p align="center">
+	<img src="/static/bs3dash.png" alt="bs3stat" title="bs3stat" />
+</p>
+
+
 ## Commands
 **Run server:**
 ```
@@ -36,4 +43,18 @@ migrate --url sqlite3://storage.db --path ./db/migrations create add_example_fie
 **Migrate**
 ```
 migrate --url sqlite3://storage.db --path ./db/migrations up # or down
+```
+
+## Backup Notifier Settings
+
+Accepted post parameters are
+
+```json
+{
+	"name":"model_name",
+	"title": "Model Name",
+	"status": "Backup::Success",
+	"duration": "00:00:24"
+
+}
 ```

@@ -8,6 +8,11 @@ Is a small dashboard service in go and vue, to collect and visualize your backup
 
 **🚧 It is still in early alpha and not production ready⚠**
 
+<p align="center">
+	<img src="/static/bs3dash.png" alt="bs3stat" title="bs3stat" />
+</p>
+
+
 ## Commands
 **Run server:**
 ```

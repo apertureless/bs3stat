@@ -78,11 +78,13 @@
         yAxis: null
       }
     },
+
     computed: {
       chartSelector () {
         return '#' + this.chartId
       }
     },
+
     mounted () {
       if (!this.axis) this.margin = zeroMargin
 
@@ -125,8 +127,9 @@
             .range(this.color)
         }
 
-        this.x = d3.scaleLinear()
+        this.x = d3.scaleTime()
           .range([0, w])
+
 
         this.y = d3.scaleLinear()
           .range([h, 0])
@@ -210,9 +213,6 @@
           .attr('width', barWidth)
           .attr('height', d => h - this.y(d.value))
 
-          this.dataset.forEach((d) => {
-            console.log(this.y(d.value))
-          })
 
         if (this.color) bar.style('fill', d => color(d.value))
         // exit

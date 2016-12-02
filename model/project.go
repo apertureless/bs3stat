@@ -7,8 +7,10 @@ import (
 // Project represends a backup project
 type Project struct {
 	gorm.Model
-	Title string `gorm:"size:255"`
-	Name  string `gorm:"size:255"`
+	Title    string `gorm:"size:255"`
+	Name     string `gorm:"size:255"`
+	Status   string `gorm:"size:255"`
+	Duration string `gorm:"size:255"`
 }
 
 // AddProject is the action to add a new project to the database
@@ -50,4 +52,9 @@ func DeleteProject(id string) {
 	var project Project
 	DB.First(&project, id)
 	DB.Delete(&project)
+}
+
+// UpdateProject can change project data
+func UpdateProject(project Project) {
+
 }

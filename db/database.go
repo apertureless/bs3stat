@@ -6,7 +6,7 @@ import (
 
 	"github.com/jinzhu/gorm"
 	// Needs to be blank import because of sqlite init function
-	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
 // InitDB creates an database and opens a connection
@@ -25,6 +25,5 @@ func InitDB(filepath string, runMigrations bool, seedDatabase bool) *gorm.DB {
 		migration.Seed(db)
 	}
 
-	db.LogMode(true)
 	return db
 }

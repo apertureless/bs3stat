@@ -1,23 +1,17 @@
 machine:
+  node:
+    version: 6
   services:
     - docker
 
 dependencies:
   pre:
-  	- go get -u github.com/labstack/echo
-	- go get -u github.com/jinzhu/gorm
-	- go get -u gothub.com/apertureless/bs3stat
-    - go build -o bs3stat .
+  	- ./build.sh
   override:
     - docker build -t apertureless/bs3stat .
     - docker run -p 3000:3000 apertureless/bs3stat:
         background: true
     - sleep 10
-
-test:
-  override:
-    - "curl http://localhost:3000/"
-    - "[[ $(curl http://localhost:3000/) = 'Hello World!' ]]"
 
 deployment:
   hub:

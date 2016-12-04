@@ -22,13 +22,13 @@ dependencies:
 
   override:
     - godep restore
-    - docker build -t apertureless/bs3stat .
-    - docker run -p 3000:3000 apertureless/bs3stat:
-        background: true
-    - sleep 10
+    - docker build --rm=false -t apertureless/bs3stat .
+
 test:
   override:
     - go test
+		- docker run -p 3000:3000 apertureless/bs3stat; sleep 10
+		- curl --retry 10 --retry-delay 5 -v http://localhost:3000
 
 deployment:
   hub:

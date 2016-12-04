@@ -3,6 +3,7 @@
 </p>
 
 [![CircleCI](https://circleci.com/gh/apertureless/bs3stat/tree/master.svg?style=svg&circle-token=7eee193cd82594280172e81cd4c54b98f7179351)](https://circleci.com/gh/apertureless/bs3stat/tree/master)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/apertureless/bs3stat/blob/master/LICENSE.txt)
 
 # bs3stat
 

@@ -24,7 +24,7 @@ dependencies:
     - godep restore
     - docker build -t apertureless/bs3stat .
     - docker run -p 3000:3000 apertureless/bs3stat:
-        background: true
+        background: false
     - sleep 10
 test:
   override:

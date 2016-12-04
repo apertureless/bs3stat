@@ -1,12 +1,12 @@
 {
 	"ImportPath": "bs3stat",
 	"GoVersion": "go1.7",
-	"GodepVersion": "v74",
+	"GodepVersion": "v62",
 	"Deps": [
 		{
 			"ImportPath": "github.com/jinzhu/gorm",
-			"Comment": "v1.0-87-g4a540f3",
-			"Rev": "4a540f3ac83a6765b8876be67994ecde022c6198"
+			"Comment": "v1.0-92-g9edd662",
+			"Rev": "9edd66250e8ae11d572213054643b7bb1ce4d102"
 		},
 		{
 			"ImportPath": "github.com/jinzhu/inflection",

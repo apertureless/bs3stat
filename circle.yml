@@ -4,10 +4,16 @@ machine:
   services:
     - docker
   environment:
-    GOROOT: ""
-    PATH: "/usr/local/go/bin:/usr/local/go_workspace/bin:~/.go_workspace/bin:${PATH}"
-    GOPATH: "${HOME}/.go_workspace:/usr/local/go_workspace:${HOME}/.go_project"
+    GOPATH: /home/ubuntu/.go_workspace
     IMPORT_PATH: "github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"
+
+general:
+  build_dir: ../.go_workspace/src/$IMPORT_PATH
+
+checkout:
+  post:
+    - mkdir -p "$GOPATH/src/$IMPORT_PATH"
+    - rsync -azC --delete $HOME/$CIRCLE_PROJECT_REPONAME/ $GOPATH/src/$IMPORT_PATH/
 
 dependencies:
   pre:
@@ -15,12 +21,14 @@ dependencies:
     - sh ./build.sh
 
   override:
-    - mkdir -p "$GOPATH/src/$IMPORT_PATH"
-    - rsync -azC --delete ./ "$GOPATH/src/$IMPORT_PATH/"
+    - godep restore
     - docker build -t apertureless/bs3stat .
     - docker run -p 3000:3000 apertureless/bs3stat:
         background: true
     - sleep 10
+test:
+  override:
+    - go test
 
 deployment:
   hub:

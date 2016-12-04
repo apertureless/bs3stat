@@ -18,7 +18,7 @@ func main() {
 	seed := flag.Bool("seed", false, "Seed database with some demo data.")
 	flag.Parse()
 
-	db := db.InitDB("storage.db", *migrate, *seed)
+	db := db.InitDB("storage/storage.db", *migrate, *seed)
 	model.SetDatabase(db)
 
 	e := echo.New()

@@ -28,10 +28,7 @@ dependencies:
 test:
   override:
     - go test
-    - docker run -d -p 3000:3000 apertureless/bs3stat:
-		  background: true
-		- sleep 10
-    - curl --retry 10 --retry-delay 5 -v http://localhost:3000
+    - docker run -d -p 3000:3000 apertureless/bs3stat; sleep 10
 
 deployment:
   hub:

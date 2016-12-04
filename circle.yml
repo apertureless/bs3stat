@@ -6,7 +6,7 @@ machine:
 
 dependencies:
   pre:
-  	- ./build.sh
+    - ./build.sh
   override:
     - docker build -t apertureless/bs3stat .
     - docker run -p 3000:3000 apertureless/bs3stat:

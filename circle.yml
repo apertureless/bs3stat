@@ -1,0 +1,26 @@
+machine:
+	node:
+      version: 6
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - CGO_ENABLED=0 go build -a -installsuffix nocgo .
+  override:
+    - docker build -t apertureless/bs3stat .
+    - docker run -p 3000:3000 apertureless/bs3stat:
+        background: true
+    - sleep 10
+
+test:
+  override:
+    - "curl http://localhost:3000/"
+    - "[[ $(curl http://localhost:3000/) = 'Hello World!' ]]"
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USERNAME -p $DOCKER_PWD $DOCKER_URL
+      - docker push apertureless/bs3stat

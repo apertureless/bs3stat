@@ -22,7 +22,7 @@ dependencies:
 
   override:
     - godep restore
-		- sh ./build-app.sh
+    - sh ./build-app.sh
     - docker build --rm=false -t apertureless/bs3stat .
 
 test:

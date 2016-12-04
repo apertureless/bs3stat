@@ -2,8 +2,10 @@
 	<img src="/static/bs3.png" alt="bs3stat" title="bs3stat" />
 </p>
 
-[![CircleCI](https://circleci.com/gh/apertureless/bs3stat/tree/master.svg?style=svg&circle-token=7eee193cd82594280172e81cd4c54b98f7179351)](https://circleci.com/gh/apertureless/bs3stat/tree/master)
+[![CircleCI](https://circleci.com/gh/apertureless/bs3stat.svg?style=svg&circle-token=7eee193cd82594280172e81cd4c54b98f7179351)](https://circleci.com/gh/apertureless/bs3stat)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/apertureless/bs3stat/blob/master/LICENSE.txt)
+[![Go Report Card](https://goreportcard.com/badge/github.com/apertureless/bs3stat)](https://goreportcard.com/report/github.com/apertureless/bs3stat)
+[![](https://images.microbadger.com/badges/image/apertureless/bs3stat:41fc616931ba8c6ac48e909588232ec3fd8cf70d.svg)](https://microbadger.com/images/apertureless/bs3stat:41fc616931ba8c6ac48e909588232ec3fd8cf70d "Get your own image badge on microbadger.com")
 
 # bs3stat
 

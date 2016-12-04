@@ -6,3 +6,4 @@ web/dist
 vendor/
 tags
 launch.json
+storage/*

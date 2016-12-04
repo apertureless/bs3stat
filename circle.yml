@@ -4,6 +4,9 @@ machine:
 
 dependencies:
   pre:
+  	- go get -u github.com/labstack/echo
+	- go get -u github.com/jinzhu/gorm
+	- go get -u gothub.com/apertureless/bs3stat
     - go build -o bs3stat .
   override:
     - docker build -t apertureless/bs3stat .

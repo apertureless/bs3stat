@@ -24,7 +24,7 @@ export default {
 		}
 	},
 	created () {
-		this.$http.get('http://localhost:3000/projects').then((response) => {
+		this.$http.get('/projects').then((response) => {
 			this.backups = response.data ? response.data : []
 			this.getProjects()
 		})

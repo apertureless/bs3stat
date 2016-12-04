@@ -32,7 +32,7 @@ test:
 
 deployment:
   hub:
-    branch: master
+    branch: develop
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USERNAME -p $DOCKER_PWD $DOCKER_URL
       - docker push apertureless/bs3stat

@@ -3,7 +3,7 @@ const pkg = require('../package')
 
 module.exports = {
   port: 4000,
-  title: 'vuex-testing',
+  title: 'bs3:stats',
   vendor: Object.keys(pkg.dependencies),
   babel: {
     babelrc: false,

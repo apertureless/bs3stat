@@ -23,16 +23,16 @@ dependencies:
   override:
     - godep restore
     - sh ./build-app.sh
-    - docker build --rm=false -t apertureless/bs3stat .
+    - docker build --rm=false -t apertureless/bs3stat:$CIRCLE_SHA1 .
 
 test:
   override:
     - go test
-    - docker run -d -p 3000:3000 apertureless/bs3stat; sleep 10
+    - docker run -d -p 3000:3000 apertureless/bs3stat:$CIRCLE_SHA1; sleep 10
 
 deployment:
   hub:
     branch: master
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USERNAME -p $DOCKER_PWD $DOCKER_URL
-      - docker push apertureless/bs3stat
+      - docker push apertureless/bs3stat:$CIRCLE_SHA1

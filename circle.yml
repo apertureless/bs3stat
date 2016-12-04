@@ -3,18 +3,18 @@ machine:
     version: 6
   services:
     - docker
-	environment:
-		IMPORT_PATH: "github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"
+  environment:
+   IMPORT_PATH: "github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"
 
 dependencies:
   pre:
-	  - go get github.com/tools/godep
+    - go get github.com/tools/godep
     - sh ./build.sh
 
-	override:
+  override:
     - mkdir -p "$GOPATH/src/$IMPORT_PATH"
     - rsync -azC --delete ./ "$GOPATH/src/$IMPORT_PATH/"
-		- sh ./build-app.sh
+    - sh ./build-app.sh
     - docker build -t apertureless/bs3stat .
     - docker run -p 3000:3000 apertureless/bs3stat:
         background: true

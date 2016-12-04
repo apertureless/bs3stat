@@ -1,8 +1,9 @@
 package migration
 
 import (
-	"bs3stat/model"
 	"fmt"
+
+	"github.com/apertureless/bs3stat/model"
 
 	"github.com/jinzhu/gorm"
 )

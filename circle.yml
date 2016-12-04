@@ -1,0 +1,38 @@
+machine:
+  node:
+    version: 6
+  services:
+    - docker
+  environment:
+    GOPATH: /home/ubuntu/.go_workspace
+    IMPORT_PATH: "github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"
+
+general:
+  build_dir: ../.go_workspace/src/$IMPORT_PATH
+
+checkout:
+  post:
+    - mkdir -p "$GOPATH/src/$IMPORT_PATH"
+    - rsync -azC --delete $HOME/$CIRCLE_PROJECT_REPONAME/ $GOPATH/src/$IMPORT_PATH/
+
+dependencies:
+  pre:
+    - go get github.com/tools/godep
+    - sh ./build.sh
+
+  override:
+    - godep restore
+    - docker build -t apertureless/bs3stat .
+    - docker run -p 3000:3000 apertureless/bs3stat:
+        background: true
+    - sleep 10
+test:
+  override:
+    - go test
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USERNAME -p $DOCKER_PWD $DOCKER_URL
+      - docker push apertureless/bs3stat

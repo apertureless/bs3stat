@@ -1,8 +1,9 @@
 package handlers
 
 import (
-	"bs3stat/model"
 	"net/http"
+
+	"github.com/apertureless/bs3stat/model"
 
 	"github.com/labstack/echo"
 )

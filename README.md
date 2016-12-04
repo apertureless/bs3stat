@@ -2,6 +2,8 @@
 	<img src="/static/bs3.png" alt="bs3stat" title="bs3stat" />
 </p>
 
+[![CircleCI](https://circleci.com/gh/apertureless/bs3stat/tree/master.svg?style=svg&circle-token=7eee193cd82594280172e81cd4c54b98f7179351)](https://circleci.com/gh/apertureless/bs3stat/tree/master)
+
 # bs3stat
 
 Is a small dashboard service in go and vue, to collect and visualize your backups made with [backup](https://github.com/backup/backup)

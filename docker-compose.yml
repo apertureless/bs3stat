@@ -1,0 +1,7 @@
+bs3stat:
+  image: apertureless/bs3stat:41fc616931ba8c6ac48e909588232ec3fd8cf70d
+  entrypoint: ["/bs3stat", "--migrate"]
+  ports:
+    - "3333:3000"
+  volumes:
+    - /srv/docker/bs3stat/storage:/storage:Z

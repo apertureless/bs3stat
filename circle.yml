@@ -4,7 +4,7 @@ machine:
 
 dependencies:
   pre:
-    - CGO_ENABLED=0 go build -a -installsuffix nocgo .
+    - go build -o bs3stat .
   override:
     - docker build -t apertureless/bs3stat .
     - docker run -p 3000:3000 apertureless/bs3stat:

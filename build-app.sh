@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
 
-go build -o bs3stat
+echo "Building application"
+godep go build -o bs3stat
 

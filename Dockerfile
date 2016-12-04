@@ -7,6 +7,6 @@ WORKDIR /
 ADD ./bs3stat /bs3stat
 ADD web/dist/ web/dist
 
-ENTRYPOINT ["/bs3stat"]
+ENTRYPOINT main
 
 EXPOSE 3000

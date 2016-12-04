@@ -1,11 +1,12 @@
 package main
 
 import (
-	"bs3stat/db"
-	"bs3stat/handlers"
-	"bs3stat/model"
 	"flag"
 	"fmt"
+
+	"github.com/apertureless/bs3stat/db"
+	"github.com/apertureless/bs3stat/handlers"
+	"github.com/apertureless/bs3stat/model"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"

@@ -1,10 +1,15 @@
 {
-	"ImportPath": "bs3stat",
+	"ImportPath": "github.com/apertureless/bs3stat",
 	"GoVersion": "go1.7",
 	"GodepVersion": "v62",
 	"Deps": [
 		{
 			"ImportPath": "github.com/jinzhu/gorm",
+			"Comment": "v1.0-92-g9edd662",
+			"Rev": "9edd66250e8ae11d572213054643b7bb1ce4d102"
+		},
+		{
+			"ImportPath": "github.com/jinzhu/gorm/dialects/sqlite",
 			"Comment": "v1.0-92-g9edd662",
 			"Rev": "9edd66250e8ae11d572213054643b7bb1ce4d102"
 		},
@@ -63,6 +68,10 @@
 		{
 			"ImportPath": "github.com/valyala/fasttemplate",
 			"Rev": "3b874956e03f1636d171bda64b130f9135f42cff"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "87635b2611e4683a6f0aa595c36683021a00b2e4"
 		},
 		{
 			"ImportPath": "golang.org/x/sys/unix",

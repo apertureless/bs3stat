@@ -1,8 +1,9 @@
 package db
 
 import (
-	"bs3stat/migration"
 	"fmt"
+
+	"github.com/apertureless/bs3stat/migration"
 
 	"github.com/jinzhu/gorm"
 	// Needs to be blank import because of sqlite init function
